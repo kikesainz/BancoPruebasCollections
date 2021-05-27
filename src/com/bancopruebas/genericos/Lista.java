@@ -1,9 +1,12 @@
 package com.bancopruebas.genericos;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import com.bancopruebas.constantes.Constantes;
 import com.bancopruebas.tipos.Persona;
+import com.github.javafaker.Faker;
 
 public class Lista {
 
@@ -14,10 +17,10 @@ public class Lista {
 	 * @return
 	 */
 	public static List creaLista(List listaPersonas) {
-
+		Faker faker = new Faker(new Locale("es"));
 		Long startTime = System.currentTimeMillis();
-		for (int i = 0; i < Constantes.NUMERO_PERSONAS; i++) {
-			listaPersonas.add(new Persona(i, Constantes.NOMBRE_PERSONA + i));
+		for (int i = 0; i < Constantes.NUMERO_PERSONAS; i++) {		
+			listaPersonas.add(new Persona( new Random().nextInt(Constantes.NUMERO_PERSONAS+1), faker.name().firstName()));
 		}
 		Long endTime = System.currentTimeMillis();
 		System.out.println("Lista - Tiempo en añadir " + Constantes.NUMERO_PERSONAS + " registros: "
